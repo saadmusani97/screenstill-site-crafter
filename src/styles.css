@@ -38,13 +38,13 @@
 @layer base {
   * { border-color: var(--ink); }
   body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); }
-  h1, h2, h3, .display { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.95; }
+  h1, h2, h3, .display { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0; line-height: 0.95; }
 }
 
 @layer components {
   .brut { border: 3px solid var(--ink); box-shadow: var(--shadow); background: var(--paper); color: var(--ink); }
   .brut-dark { border: 3px solid var(--paper); box-shadow: var(--shadow-light); }
-  .btn { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .04em; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: .55rem 1rem; background: var(--acid); color: var(--ink); transition: transform .1s, box-shadow .1s; cursor: pointer; }
+  .btn { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: .55rem 1rem; background: var(--acid); color: var(--ink); transition: transform .1s, box-shadow .1s; cursor: pointer; }
   .btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
   .btn:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 var(--ink); }
   .btn-on-dark { box-shadow: 4px 4px 0 var(--paper); border-color: var(--paper); }
@@ -62,6 +62,10 @@
   .belt { background: repeating-linear-gradient(90deg, var(--ink) 0 14px, var(--acid) 14px 28px); background-size: 28px 100%; animation: belt .6s linear infinite; }
   .flow-dot { animation: flow 1.6s linear infinite; }
   .shake { animation: shake .4s; }
+  .concept-link { justify-content: flex-start; text-align: left; gap: .75rem; font-family: var(--font-sans); text-transform: none; font-weight: 700; line-height: 1.4; font-size: .9rem; }
+  .workshop-tab { border: 0; box-shadow: none; border-bottom: 4px solid transparent; background: transparent; color: var(--foreground); padding: .9rem 1rem; }
+  .workshop-tab[aria-selected="true"] { border-bottom-color: var(--acid); color: var(--acid); }
+  .workshop-tab:hover { transform: none; box-shadow: none; background: var(--ink); }
 }
 
 @keyframes blink { 50% { opacity: 0; } }
