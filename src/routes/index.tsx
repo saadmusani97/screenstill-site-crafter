@@ -37,7 +37,7 @@ function Index() {
     return () => window.removeEventListener("keydown", h);
   }, [i, go]);
 
-  const ch = CHAPTERS[i];
+  const ch = CHAPTERS[i]!;
   const Body = ch.Component;
 
   return (

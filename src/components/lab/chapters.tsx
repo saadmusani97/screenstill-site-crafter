@@ -30,7 +30,7 @@ const WWW = ({ what, why, where }: { what: string; why: string; where: string })
 function Landing({ next }: P) {
   const full = "AI is not coming. AI is already here.";
   const [n, setN] = useState(0);
-  useEffect(() => { if (n < full.length) { const t = setTimeout(() => setN(n + 1), 55); return () => clearTimeout(t); } }, [n]);
+  useEffect(() => { if (n >= full.length) return; const t = setTimeout(() => setN(n + 1), 55); return () => clearTimeout(t); }, [n]);
   const uses = ["Phone unlock (Face ID)", "YouTube recommendations", "Google Maps traffic", "Spam filter", "Autocorrect keyboard", "Instagram filters"];
   const [picked, setPicked] = useState<string[]>([]);
   return (
@@ -67,7 +67,7 @@ const TYPES = [
 const LEVELS = [["EXISTS", "bg-volt"], ["DEVELOPING", "bg-acid"], ["SPECULATIVE", "bg-red"]];
 function Types() {
   const [sel, setSel] = useState(0);
-  const t = TYPES[sel];
+  const t = TYPES[sel]!;
   return (
     <Section kicker="Chapter 02" title="Types of AI" intro="Har 'AI' same nahi hota. Movie wala robot aur tumhara phone ka keyboard — dono AI kehlaate hain, par reality bahut alag hai. Click karke Reality Meter dekho." tone="paper">
       <div className="grid md:grid-cols-2 gap-6">
@@ -127,8 +127,8 @@ function Engineer() {
           ))}
         </div>
         <div key={s} className="pop mt-4 border-[3px] border-ink bg-cobalt text-paper p-4">
-          <div className="display text-3xl">STATION {s + 1}: {STATIONS[s][0]}</div>
-          <p className="mt-1 text-lg">{STATIONS[s][1]}</p>
+          <div className="display text-3xl">STATION {s + 1}: {STATIONS[s]![0]}</div>
+          <p className="mt-1 text-lg">{STATIONS[s]![1]}</p>
         </div>
         <div className="mt-3 flex gap-2">
           <button className="btn text-sm" onClick={() => setS((s + 1) % STATIONS.length)}>Next station →</button>
@@ -159,11 +159,11 @@ function TermsA() {
   const [run, setRun] = useState(0);
   const [out, setOut] = useState<string[]>([]);
   const key = Object.keys(NEXT).find((k) => text.toLowerCase().includes(k)) ?? "default";
-  const preds = NEXT[key];
+  const preds = NEXT[key]!;
   useEffect(() => {
     if (!run) return;
     setOut([]);
-    const words = [preds[0][0], "...", "(pattern se)"];
+    const words = [preds[0]![0], "...", "(pattern se)"];
     const ts = words.map((w, k) => setTimeout(() => setOut((o) => [...o, w]), 700 + k * 500));
     return () => ts.forEach(clearTimeout);
   }, [run]); // eslint-disable-line
@@ -279,12 +279,12 @@ function Embeddings() {
             {QUERIES.map((x, k) => <button key={x.q} disabled={placed.length < 3} className={`btn text-sm ${q === k ? "btn-blue" : "btn-paper"} disabled:opacity-40`} onClick={() => setQ(k)}>"{x.q}"</button>)}
           </div>
           {placed.length < 3 && <p className="text-xs font-mono mt-1">Pehle teeno sentences embed karo.</p>}
-          {Q && <div className="mt-2 text-sm border-[3px] border-ink p-2 pop"><b>Semantic search:</b> {Q.near.map((n) => SENT[n].t).join(" + ")}<br /><b>Keyword search:</b> {Q.kw}</div>}
+          {Q && <div className="mt-2 text-sm border-[3px] border-ink p-2 pop"><b>Semantic search:</b> {Q.near.map((n) => SENT[n]!.t).join(" + ")}<br /><b>Keyword search:</b> {Q.kw}</div>}
         </Card>
         <div className="brut relative aspect-square bg-paper" style={{ backgroundImage: "linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px)", backgroundSize: "10% 10%", backgroundBlendMode: "normal", opacity: 1 }}>
           <span className="absolute top-1 left-2 tag bg-ink text-acid">SEMANTIC SPACE</span>
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            {Q && Q.near.map((n) => <line key={n} x1={Q.x} y1={Q.y} x2={SENT[n].x} y2={SENT[n].y} stroke="var(--cobalt)" strokeWidth="1.2" strokeDasharray="2 1" />)}
+            {Q && Q.near.map((n) => <line key={n} x1={Q.x} y1={Q.y} x2={SENT[n]!.x} y2={SENT[n]!.y} stroke="var(--cobalt)" strokeWidth="1.2" strokeDasharray="2 1" />)}
           </svg>
           {SENT.map((s, k) => (
             <div key={s.t} className={`absolute -translate-x-1/2 -translate-y-1/2 border-[3px] border-ink px-2 py-1 text-xs font-bold ${s.c} transition-all duration-700`}
