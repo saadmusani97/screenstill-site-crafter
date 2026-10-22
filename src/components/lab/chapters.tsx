@@ -371,7 +371,7 @@ function Agents() {
         <div className="flex gap-1 mt-3 flex-wrap font-mono text-xs">{["Goal", "Plan", "Tool", "Observe", "Next action", "Final answer"].map((x) => <span key={x} className="tag">{x} ↻</span>)}</div>
         <ol className="mt-3 space-y-1">
           {AGENT.slice(0, n).map(([a, b], k) => (
-            <li key={k} className={`slide-in border-[3px] border-ink p-2 text-sm ${a.includes("Tool") ? "bg-cobalt text-paper" : a.includes("Final") ? "bg-volt" : "bg-paper"}`}><b>{a}</b> — {b}</li>
+            <li key={k} className={`slide-in border-[3px] border-ink p-2 text-sm ${a!.includes("Tool") ? "bg-cobalt text-paper" : a!.includes("Final") ? "bg-volt" : "bg-paper"}`}><b>{a}</b> — {b}</li>
           ))}
         </ol>
       </Card>
