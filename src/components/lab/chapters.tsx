@@ -56,7 +56,7 @@ function Landing({ next }: P) {
 
 /* 2 TYPES */
 const TYPES = [
-  { g: "Capability", n: "Narrow AI", s: 0, d: "Ek specific kaam mein expert — ChatGPT, face unlock, Netflix recommendations. Sab AI jo aaj exist karta hai, narrow hai." },
+  { g: "Capability", n: "Narrow AI", s: 0, d: "Ek specific kaam mein expert — ChatGPT, face unlock, Netflix recommendations. Aaj ke deployed systems broad tasks bhi kar sakte hain, lekin dependable AGI established nahi hai." },
   { g: "Capability", n: "AGI", s: 2, d: "Human-level general intelligence jo koi bhi kaam seekh sake. Abhi tak achieve NAHI hua — research aur debate chal raha hai." },
   { g: "Capability", n: "ASI", s: 2, d: "Humans se zyada smart AI. Purely speculative — science fiction aur philosophy ka topic." },
   { g: "Behaviour", n: "Reactive Machines", s: 0, d: "Sirf current input pe react karta hai, memory nahi. Example: IBM Deep Blue chess." },
@@ -97,7 +97,7 @@ function Types() {
           </div>
         </Card>
       </div>
-      <Aha>Aaj jo bhi AI tum use karte ho, woh Narrow AI hai. AGI aur self-aware AI abhi exist nahi karte.</Aha>
+      <Aha>Ye introductory teaching classifications hain. Broad capability AGI ka proof nahi; AGI aur consciousness established achievements nahi hain.</Aha>
     </Section>
   );
 }
@@ -186,7 +186,7 @@ function TermsA() {
           <button className="btn btn-blue mt-2 text-sm" onClick={() => setRun(run + 1)}>Feed the machine ⚙️</button>
           {run > 0 && (
             <div key={run} className="mt-3 bg-ink text-paper p-3 border-[3px] border-ink">
-              <div className="font-mono text-xs text-acid">LLM MACHINE · predicting next token…</div>
+              <div className="font-mono text-xs text-acid">TOY SIMULATION · illustrative probabilities, not a live LLM</div>
               {preds.map(([w, p], k) => (
                 <div key={w} className="flex items-center gap-2 mt-1 text-sm">
                   <span className="w-20 font-mono">{w}</span>
@@ -199,7 +199,7 @@ function TermsA() {
           )}
         </Card>
       </div>
-      <Aha>LLM "sochta" nahi — woh language patterns se predict karta hai ki aage kya aayega. Isliye woh confident hoke bhi galat ho sakta hai.</Aha>
+      <Aha>LLM learned patterns aur context se next tokens generate karta hai. Complex capabilities ho sakti hain, lekin fluent ya confident answer truth ka proof nahi.</Aha>
     </Section>
   );
 }
@@ -217,7 +217,7 @@ function TermsB() {
     <Section kicker="Chapter 05 · Terminology Lab C–D" title="Tokens · Context · Training" tone="paper">
       <Card>
         <div className="display text-3xl">4C · Tokens + Context Window</div>
-        <p className="text-sm mt-1">Model words nahi, <b>tokens</b> (chhote pieces) padhta hai. Context window = ek baar mein kitne tokens yaad rakh sakta hai.</p>
+        <p className="text-sm mt-1">Model <b>tokens</b> (text pieces) process karta hai. Ye toy splitter hai, real tokenizer nahi. Context window request ka token budget hai, human memory nahi.</p>
         <textarea className="w-full border-[3px] border-ink p-2 mt-2 font-mono bg-paper" rows={2} value={p} onChange={(e) => setP(e.target.value)} />
         <label className="font-mono text-sm flex items-center gap-3 mt-2">Context size: {size} tokens
           <input type="range" min={4} max={40} value={size} onChange={(e) => setSize(+e.target.value)} className="flex-1 accent-current" />
@@ -227,14 +227,14 @@ function TermsB() {
             <span key={k + t} className={`pop px-1.5 py-0.5 border-2 border-ink font-mono text-sm ${k < lost ? "bg-paper/20 text-paper/40 line-through" : TOKCOL[k % 4]}`} style={{ animationDelay: `${k * 25}ms` }}>{t}</span>
           ))}
         </div>
-        <p className="font-mono text-sm mt-2">{toks.length} tokens · {lost > 0 ? <span className="text-red font-bold">⚠ {lost} purane tokens ab model ko dikh nahi rahe!</span> : <span>✓ Sab context mein fit hai</span>}</p>
-        <p className="text-sm mt-1">Isliye lambi chats/documents mein model shuru ki baatein "bhool" jata hai — summary ya RAG se manage karte hain.</p>
+        <p className="font-mono text-sm mt-2">{toks.length} toy pieces · {lost > 0 ? <span className="text-red font-bold">⚠ {lost} purane tokens ab model ko dikh nahi rahe!</span> : <span>✓ Sab context mein fit hai</span>}</p>
+        <p className="text-sm mt-1">Ye demo oldest pieces trim karta hai. Real app history summarise/trim kar sakti hai; provider over-limit request reject bhi kar sakta hai. Input aur output dono ka budget plan karo.</p>
       </Card>
       <Card>
         <div className="display text-3xl">4D · Training vs Inference</div>
         <div className="flex gap-2 mt-2"><button className="btn btn-red text-sm" onClick={() => setLane(1)}>Run Training</button><button className="btn btn-green text-sm" onClick={() => setLane(2)}>Run Inference</button><Again onClick={() => setLane(0)} /></div>
-        {[["TRAINING", ["📚 Billions of examples", "🔁 Learning patterns", "🧠 Trained model"], "Weeks · crores ka GPU cost · ek baar", 1, "bg-red text-paper", "4s"],
-          ["INFERENCE", ["💬 Your prompt", "🧠 Trained model", "✅ Response"], "Seconds · har user request pe", 2, "bg-volt", "0.8s"]].map(([n, steps, note, id, c, dur]) => (
+        {[["TRAINING", ["📚 Billions of examples", "🔁 Learning patterns", "🧠 Trained model"], "Illustrative: training time/cost scale pe depend", 1, "bg-red text-paper", "4s"],
+          ["INFERENCE", ["💬 Your prompt", "🧠 Trained model", "✅ Response"], "Inference: latency/cost model pe depend", 2, "bg-volt", "0.8s"]].map(([n, steps, note, id, c, dur]) => (
           <div key={n as string} className="mt-3 border-[3px] border-ink p-2">
             <div className="flex justify-between"><b className="display">{n as string}</b><span className="font-mono text-xs">{note as string}</span></div>
             <div className="grid grid-cols-3 gap-2 mt-2">{(steps as string[]).map((s) => <div key={s} className={`border-2 border-ink p-2 text-sm ${c}`}>{s}</div>)}</div>
@@ -263,7 +263,7 @@ function Embeddings() {
   const [q, setQ] = useState<number | null>(null);
   const Q = q !== null ? QUERIES[q] : null;
   return (
-    <Section kicker="Chapter 06 · Terminology Lab E–F" title="Embeddings · Vector DB" tone="cobalt" intro="Computer ko meaning kaise samjhaye? Har sentence ko numbers ki list (vector) mein badlo — similar meaning = paas paas points.">
+    <Section kicker="Chapter 06 · Toy vectors & positions" title="Embeddings · Vector DB" tone="cobalt" intro="Computer ko meaning kaise samjhaye? Har sentence ko numbers ki list (vector) mein badlo — similar meaning = paas paas points.">
       <div className="grid md:grid-cols-2 gap-4">
         <Card>
           <div className="display text-2xl">4E · Convert to vectors</div>
@@ -328,7 +328,7 @@ function Rag() {
             </div>
           ))}
         </div>
-        {mode === "on" && step >= 1 && <div className="mt-3 border-[3px] border-dashed border-ink p-2 font-mono text-xs pop">📄 handbook.pdf p.12: "Central Library: Mon–Sat 8:00 AM – 9:00 PM. Sunday closed."</div>}
+        {mode === "on" && step >= 1 && <div className="mt-3 border-[3px] border-dashed border-ink p-2 font-mono text-xs pop">📄 Fictional handbook.pdf p.12: "Central Library: Mon–Sat 8:00 AM – 9:00 PM. Sunday closed."</div>}
         {done && (
           <div className={`mt-3 p-3 border-[3px] border-ink pop ${mode === "on" ? "bg-volt" : "bg-red text-paper"}`}>
             {mode === "on" ? "🤖 Handbook (p.12) ke hisaab se library Mon–Sat raat 9 baje band hoti hai, Sunday closed." : "🤖 Usually college libraries shaam 5–8 baje ke beech band hoti hain... (Guess! Model ko tumhare college ka data pata hi nahi.)"}
@@ -366,7 +366,7 @@ function Agents() {
     <Section kicker="Chapter 08 · Terminology Lab H–I" title="Agents · Fine-tuning" tone="acid">
       <Card>
         <div className="display text-3xl">4H · AI Agent loop</div>
-        <p className="text-sm">Chatbot sirf jawab deta hai. Agent <b>goal</b> leke khud steps choose karta hai aur tools use karta hai.</p>
+        <p className="text-sm">Agent <b>goal</b> ke liye dynamic steps/tools choose kar sakta hai; chatbot bhi tools use kar sakta hai. Ye loop scripted illustration hai, live autonomous agent nahi.</p>
         <div className="flex gap-2 mt-2 flex-wrap"><button className="btn btn-blue text-sm" onClick={() => { setN(0); setAuto(true); }}>▶ Run agent</button><button className="btn btn-paper text-sm" onClick={() => setN(Math.min(n + 1, AGENT.length))}>Step →</button><Again onClick={() => { setN(0); setAuto(false); }} /></div>
         <div className="flex gap-1 mt-3 flex-wrap font-mono text-xs">{["Goal", "Plan", "Tool", "Observe", "Next action", "Final answer"].map((x) => <span key={x} className="tag">{x} ↻</span>)}</div>
         <ol className="mt-3 space-y-1">
@@ -388,7 +388,7 @@ function Agents() {
         ))}
         <p className="mt-3 text-sm font-mono">Prompting = better instructions · RAG = current/private knowledge · Fine-tuning = repeated behaviour/style</p>
       </Card>
-      <Aha>Fine-tuning pehla solution nahi hai. Order: Prompting → RAG → (zarurat ho toh) Fine-tuning.</Aha>
+      <Aha>Problem diagnose karo: instructions ke liye prompting, knowledge ke liye RAG, behaviour ke liye fine-tuning. Ye rigid mandatory order nahi; combinations common hain.</Aha>
     </Section>
   );
 }
@@ -398,7 +398,7 @@ const OPTS = ["Prompting", "RAG", "Fine-tuning", "Agent", "Multimodal AI"];
 const CH = [
   { s: "College FAQ bot jo 200-page student handbook se answer de.", a: "RAG", e: "Knowledge ek document mein hai aur update hota rahega — retrieve karke answer do." },
   { s: "Personal study planner jo tumhara calendar check kare, slots block kare, reminders bheje.", a: "Agent", e: "Multiple steps + tools (calendar, reminders) — yeh agent ka kaam hai." },
-  { s: "Hazaaron product reviews mein 'battery complaints' search karna.", a: "RAG", e: "Embeddings + vector search meaning se dhoondhta hai, phir LLM summarize karta hai." },
+  { s: "Hazaaron product reviews mein battery complaints retrieve karke summary banana.", a: "RAG", e: "Embeddings + vector search meaning se dhoondhta hai, phir LLM summarize karta hai." },
   { s: "Upload ki hui photo ka caption generate karna.", a: "Multimodal AI", e: "Input image hai, output text — dono media samajhne wala model chahiye." },
   { s: "Company emails ko polite, professional tone mein rewrite karna.", a: "Prompting", e: "Clear instructions + examples kaafi hain. Fine-tuning tabhi jab scale pe exact style chahiye." },
 ];
